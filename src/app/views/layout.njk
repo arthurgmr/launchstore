@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        {% block head %}
+        <title>Private Class</title>             
+        {% endblock %}
+
+        <link rel="stylesheet" href="/styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+    </head>
+
+    <body>
+        
+        {%include "parts/header.njk"%}
+
+        {% block content %}{% endblock %}
+
+        {%include "parts/footer.njk"%}
+
+        <script src="/scripts.js"></script>
+    </body>
+
+
+
+
+</html>
