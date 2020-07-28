@@ -34,5 +34,13 @@ module.exports = {
             birthDay: `${day}/${month}`,
             format: `${day}/${month}/${year}`
         }
-    }   
+    },
+
+/*  Função para converter em moeda; */
+    formatPrice(price) {
+        return value = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price/100)
+    }
 }
