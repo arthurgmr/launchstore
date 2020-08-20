@@ -26,10 +26,16 @@ module.exports = {
 
         const day = `0${date.getUTCDate()}`.slice(-2)
 
+        const hour = date.getHours()
+
+        const minutes = date.getMinutes()
+
         return {
             day,
             month,
             year,
+            hour,
+            minutes,
             iso: `${year}-${month}-${day}`, // retorno tipo iso
             birthDay: `${day}/${month}`,
             format: `${day}/${month}/${year}`
