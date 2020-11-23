@@ -27,16 +27,19 @@ module.exports = {
             }            
         }
 
+        console.log(req.files)
+
         if (req.files.length == 0)
             return res.send('Please, send at least one image!')
                  
-        console.log(req.files)
+        
 
         let results = await Product.create(req.body)
         const productId = results.rows[0].id
 
         const filesPromise = req.files.map(file => File.create({...file, product_id: productId}))
         await Promise.all(filesPromise)
+        
 
         return res.redirect(`products/${productId}`)
 
@@ -106,10 +109,10 @@ module.exports = {
         }
 
         if(req.body.removed_files) {
-            // 1,2,3,
-            const removedFiles = req.body.removed_files.split(",") // [1,2,3,]
+            //come to frontend: 1,2,3,
+            const removedFiles = req.body.removed_files.split(",") //array [1,2,3,]
             const lastIndex = removedFiles.length - 1
-            removedFiles.splice(lastIndex, 1) // [1,2,3]
+            removedFiles.splice(lastIndex, 1) //removed last position(",") [1,2,3]
 
             const removedFilesPromise = removedFiles.map(id => File.delete(id))
 
