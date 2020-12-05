@@ -30,6 +30,28 @@ const Mask = {
             style: 'currency',
             currency: 'BRL'
         }).format(value/100)
+    },
+    cpfCnpj(value) {
+        value = value.replace(/\D/g,"")
+
+        //limit characters
+
+        // chef if is cnpj and apply mask 
+        if (value.length > 11) {
+            value = value
+                .replace(/(\d{2})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1/$2')
+                .replace(/(\d{4})(\d)/, '$1-$2')
+
+        } else {
+        //apply cpf mask
+            value = value
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+        }
+        return value
     }
 }
 

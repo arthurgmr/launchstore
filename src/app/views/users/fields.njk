@@ -1,0 +1,89 @@
+<div class="item">
+    <div>Full Name</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="name"
+            placeholder="Type your full name"
+            value="{{ user.name }}" 
+        >           
+    </div>
+</div>
+
+<div class="item">
+    <div>Email</div>
+    <div class="input">
+        <input 
+            type="email" 
+            name="email"
+            placeholder="Type your email"
+            value="{{ user.email }}" 
+        >           
+    </div>
+</div>
+
+<div class="item">
+    <div>Create Passaword</div>
+    <div class="input">
+        <input 
+            type="passaword" 
+            name="passaword"
+            placeholder="Type your passaword"
+            value="{{ user.passaword }}" 
+        >           
+    </div>
+</div>
+
+{% if not user.id %}
+
+<div class="item">
+    <div>Repeat Passaword</div>
+    <div class="input">
+        <input 
+            type="passaword" 
+            name="passawordRepeat"
+            placeholder="Repeat your password"
+
+        >           
+    </div>
+</div>
+
+{% endif %}
+
+<div class="item">
+    <div>CPF or CNPJ</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="cpfcnpj"
+            placeholder="Type your document"
+            autocomplete="off"
+            value="{{ user.cpf_cnpj }}"
+            onkeydown="Mask.apply(this, 'cpfCnpj')"
+        >           
+    </div>
+</div>
+
+<div class="item">
+    <div>CEP</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="cep"
+            placeholder="Type your CEP"
+            value="{{ user.cep }}" 
+        >           
+    </div>
+</div>
+
+<div class="item">
+    <div>Address</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="address"
+            placeholder="Type your Address with number house's!"
+            value="{{ user.address }}" 
+        >           
+    </div>
+</div>
