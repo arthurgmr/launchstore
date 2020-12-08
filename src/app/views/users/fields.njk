@@ -16,8 +16,8 @@
         <input 
             type="email" 
             name="email"
-            placeholder="Type your email"
-            value="{{ user.email }}" 
+            value="{{ user.email }}"
+            onblur="Validate.apply(this, 'isEmail')" 
         >           
     </div>
 </div>
@@ -26,10 +26,10 @@
     <div>Create Passaword</div>
     <div class="input">
         <input 
-            type="passaword" 
-            name="passaword"
-            placeholder="Type your passaword"
-            value="{{ user.passaword }}" 
+            type="password" 
+            name="password"
+            placeholder="Password"
+            value="{{ user.password }}" 
         >           
     </div>
 </div>
@@ -40,9 +40,9 @@
     <div>Repeat Passaword</div>
     <div class="input">
         <input 
-            type="passaword" 
-            name="passawordRepeat"
-            placeholder="Repeat your password"
+            type="password" 
+            name="passwordRepeat"
+            placeholder="Repeat password"
 
         >           
     </div>
@@ -56,10 +56,11 @@
         <input 
             type="text" 
             name="cpfcnpj"
-            placeholder="Type your document"
             autocomplete="off"
             value="{{ user.cpf_cnpj }}"
             onkeydown="Mask.apply(this, 'cpfCnpj')"
+            onblur="Validate.apply(this, 'isCpfCnpj')" 
+
         >           
     </div>
 </div>
@@ -70,8 +71,11 @@
         <input 
             type="text" 
             name="cep"
-            placeholder="Type your CEP"
-            value="{{ user.cep }}" 
+            value="{{ user.cep }}"
+            onkeydown="Mask.apply(this, 'cep')"
+            onblur="Validate.apply(this, 'isCep')" 
+
+
         >           
     </div>
 </div>

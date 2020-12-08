@@ -596,3 +596,13 @@ form .item #photos-preview img {
 .form input[name="cpfcnj"] {
     max-width: 60%;
 }
+
+/* validate errors */
+
+.input .error {
+    background-color: #e74c3c;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+    margin-top: 1px;
+}
