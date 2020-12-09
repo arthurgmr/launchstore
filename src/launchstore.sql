@@ -33,7 +33,7 @@ CREATE TABLE "users" (
   "password" text NOT NULL,
   "cpf_cnpj" text UNIQUE NOT NULL,
   "cep" text,
-  "adress" text,
+  "address" text,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );

@@ -13,9 +13,9 @@ async function post(req, res, next) {
     }
 
     let { email, cpf_cnpj, password, passwordRepeat } = req.body
+    cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
 
-    //check if user exists [email cpf_cnpj]
-    
+    //check if user exists [email cpf_cnpj]    
     const user = await User.findOne({
         where: {email},
         or: {cpf_cnpj}
