@@ -48,5 +48,43 @@ module.exports = {
             style: 'currency',
             currency: 'BRL'
         }).format(price/100)
-    }
+    },
+
+    formatCep(value) {
+        value = value
+            .replace(/\D/g,"")
+            .replace(/(\d{5})(\d)/, '$1-$2')
+
+        if (value.length > 9){
+            value = value.slice(0, -1)
+        }
+        return value
+
+    },
+
+    formatCpfCnpj(value) {
+        value = value.replace(/\D/g,"")
+
+        //limit characters
+        if (value.length > 14){
+            value = value.slice(0, -1)
+        }
+
+        // chef if is cnpj and apply mask 
+        if (value.length > 11) {
+            value = value
+                .replace(/(\d{2})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1/$2')
+                .replace(/(\d{4})(\d)/, '$1-$2')
+
+        } else {
+        //apply cpf mask
+            value = value
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+        }
+        return value
+    },
 }

@@ -23,12 +23,17 @@
 </div>
 
 <div class="item">
-    <div>Create Passaword</div>
+    <div>Passaword</div>
     <div class="input">
         <input 
             type="password" 
             name="password"
+            {% if not user.id %}
             placeholder="Password"
+            {% else %}
+            placeholder="Change your Password"
+            {% endif %}
+
         >           
     </div>
 </div>

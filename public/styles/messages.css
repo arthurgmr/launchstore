@@ -22,3 +22,7 @@
 .messages.error {
     background-color: #e74c4c;
 }
+
+.messages.success {
+    background-color: rgb(122, 182, 30);
+}

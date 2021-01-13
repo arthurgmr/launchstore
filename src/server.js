@@ -2,9 +2,11 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
 const methodOverride = require('method-override')
+const session = require('./config/session')
 
 const server = express ()
 
+server.use(session)
 server.use(express.urlencoded({ extended: true })) /* responsável por funcionar o require.body */
 server.use(express.static('public'))
 server.use(methodOverride('_method')) /* esta dep está sobrescrevendo o tipo do método. */

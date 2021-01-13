@@ -1,6 +1,7 @@
 const { create } = require('browser-sync')
 const db = require('../../config/db')
 const { hash } = require('bcryptjs')
+const { update } = require('../controllers/UserController')
 
 
 module.exports = {
@@ -40,8 +41,6 @@ module.exports = {
             //hash of password
             const passwordHash = await hash(data.password, 8)
 
-            console.log(data.cpf_cnpj)
-
             const values = [
                 data.name,
                 data.email,
@@ -57,5 +56,24 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
+    },
+    async update(id, fields) {
+
+        let query = "UPDATE users SET"
+
+        Object.keys(fields).map((key, index, array) => {
+            if((index + 1) < array.length) {
+                query = `${query}
+                    ${key} = '${fields[key]}',
+                `
+            }else {
+                //last interation
+                query = `${query}
+                    ${key} = '${fields[key]}'
+                    WHERE id = ${id}
+                `
+            }
+        })
+        await db.query(query)
     }
 }
