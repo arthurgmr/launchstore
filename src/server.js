@@ -7,9 +7,14 @@ const session = require('./config/session')
 const server = express ()
 
 server.use(session)
-server.use(express.urlencoded({ extended: true })) /* responsável por funcionar o require.body */
+server.use((req, res, next) => { // global variables
+    res.locals.session = req.session // res.locals.session in all template engined
+    next()
+})
+
+server.use(express.urlencoded({ extended: true })) //responsável por funcionar o require.body
 server.use(express.static('public'))
-server.use(methodOverride('_method')) /* esta dep está sobrescrevendo o tipo do método. */
+server.use(methodOverride('_method')) //esta dep está sobrescrevendo o tipo do método
 server.use(routes)
 
 server.set("view engine", "njk")
