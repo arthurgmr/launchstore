@@ -34,13 +34,27 @@ CREATE TABLE "users" (
   "cpf_cnpj" text UNIQUE NOT NULL,
   "cep" text,
   "address" text,
+  "reset_token" text,
+  "reset_token_expires" text
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );
 
-ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
-ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
-ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "products" 
+ADD FOREIGN KEY ("category_id") 
+REFERENCES "categories" ("id")
+ON DELETE CASCADE; -- cascade effect when delete user and products
+
+ALTER TABLE "products" 
+ADD FOREIGN KEY ("user_id") 
+REFERENCES "users" ("id")
+ON DELETE CASCADE; -- cascade effect when delete user and products
+
+ALTER TABLE "files" 
+ADD FOREIGN KEY ("product_id") 
+REFERENCES "products" ("id")
+ON DELETE CASCADE; -- cascade effect when delete user and products
+
 
 
 --create procedure
