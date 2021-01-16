@@ -27,23 +27,31 @@ module.exports = {
             }            
         }
 
-        console.log(req.files)
-
         if (req.files.length == 0)
             return res.send('Please, send at least one image!')
                  
         
+        try {
+            req.body.user_id = req.session.userId        
 
-        let results = await Product.create(req.body)
-        const productId = results.rows[0].id
+            let results = await Product.create(req.body)
+            const productId = results.rows[0].id
+    
+            const filesPromise = req.files.map(file => File.create({...file, product_id: productId}))
+            await Promise.all(filesPromise)
+            
+    
+            return res.redirect(`products/${productId}`)
 
-        const filesPromise = req.files.map(file => File.create({...file, product_id: productId}))
-        await Promise.all(filesPromise)
-        
-
-        return res.redirect(`products/${productId}`)
-
-        
+        }catch(err) {
+            console.log(err)
+            const categories = await Category.all()
+            return res.render("products/create", {
+                product: req.body,
+                categories,
+                error: 'Some error happened!'
+            })
+        }        
     },
     async show(req, res) {
         let results = await Product.find(req.params.id)

@@ -48,5 +48,23 @@ module.exports = {
                 error: "Some error happened!"
             })
         }
+    },
+    async delete(req, res) {
+        try {
+            await User.delete(req.body.id)
+            req.session.destroy()
+
+            return res.render("session/login", {
+                success: "Account Successfully Deleted"
+            })
+
+
+        }catch(err) {
+            console.log(err)
+            return res.render("users/index", {
+                user: req.body,
+                error: "Some error happened!"
+            })
+        }
     }
 }
