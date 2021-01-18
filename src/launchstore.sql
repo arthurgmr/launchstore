@@ -43,17 +43,17 @@ CREATE TABLE "users" (
 ALTER TABLE "products" 
 ADD FOREIGN KEY ("category_id") 
 REFERENCES "categories" ("id")
-ON DELETE CASCADE; -- cascade effect when delete user and products
+ON DELETE CASCADE; -- cascade effect when delete user and category;
 
 ALTER TABLE "products" 
 ADD FOREIGN KEY ("user_id") 
 REFERENCES "users" ("id")
-ON DELETE CASCADE; -- cascade effect when delete user and products
+ON DELETE CASCADE; -- cascade effect when delete user and products;
 
 ALTER TABLE "files" 
 ADD FOREIGN KEY ("product_id") 
 REFERENCES "products" ("id")
-ON DELETE CASCADE; -- cascade effect when delete user and products
+ON DELETE CASCADE; -- cascade effect when delete user and products;
 
 
 
