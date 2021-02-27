@@ -19,9 +19,9 @@ function checkAllFields(body) {
 async function show(req, res, next) {
     const { userId: id } = req.session
 
-    const user = await User.findOne({ where: {id} })
+    const user = await User.findOne({where: id})
 
-        if (!user) return res.render("user/register", {
+        if (!user) return res.render("users/register", {
             error: "User not found!"
         })
 

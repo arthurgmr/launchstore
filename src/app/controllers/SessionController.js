@@ -56,7 +56,7 @@ module.exports = {
 
             // notify user 
             return res.render("session/forgot-password", {
-                success: "Check you email to reset password!"
+                success: "Check your email to reset password!"
             })
 
 
