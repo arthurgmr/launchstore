@@ -89,10 +89,13 @@ module.exports = {
     },
     async delete(req, res) {
         try {
-            const product = await Product.findAll({where: {user_id: req.body.id}})
+            
+            const products = await Product.findAll({where: {user_id: req.body.id}})
+
             //get all images of products
             const allFilesPromise = products.map(product => 
                 Product.files(product.id))
+                
             let promiseResults = await Promise.all(allFilesPromise)
 
             //remove user
@@ -100,8 +103,8 @@ module.exports = {
             req.session.destroy()
 
             //remove images from public folder
-            promiseResults.map(results => {
-                results.rows.map(file => unlinkSync(file.path))
+            promiseResults.map(files => {
+                files.map(file => unlinkSync(file.path))
             })
 
             return res.render("session/login", {

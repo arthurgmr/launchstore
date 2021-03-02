@@ -8,7 +8,7 @@ module.exports = {
     
     async create(req, res) {
         try {
-            const categories = await Category.finAll()
+            const categories = await Category.findAll()
             return res.render("products/create", {categories})
 
         }catch(err) {
@@ -51,7 +51,7 @@ module.exports = {
             })
     
             const filesPromise = req.files.map(file => 
-                File.create({...file, product_id}))
+                File.create({name: file.filename, path: file.path, product_id}))
             await Promise.all(filesPromise)
             
     
@@ -105,7 +105,7 @@ module.exports = {
             product.price = formatPrice(product.price)
 
             // get categories
-            const categories = await Category.all()
+            const categories = await Category.findAll()
 
             // get images
             let files = await Product.files(product.id)
@@ -172,9 +172,16 @@ module.exports = {
         }
     },
     async delete(req, res) {
+
+        //get all files
+        const files = await Product.files(req.body.id)
+
+        //remove product
         await Product.delete(req.body.id)
+
+        //remove images from public folder
+        files.map(file => {unlinkSync(file.path)})
 
         return res.redirect('/products/create')
     }
-
 }

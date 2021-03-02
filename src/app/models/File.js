@@ -1,6 +1,6 @@
 const Base = require('./Base')
 
-Base.init({ table: 'file' })
+Base.init({ table: 'files' })
 
 module.exports = {
     ...Base

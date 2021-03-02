@@ -6,7 +6,11 @@ const { hash } = require('bcryptjs')
 
 module.exports = {
     loginForm(req, res) {
-        return res.render("session/login")
+        try {
+            return res.render("session/login")
+        }catch(err) {
+            console.log(err)
+        }
     },
     login(req, res) {     
         // put user in req.session
