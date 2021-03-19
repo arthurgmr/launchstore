@@ -65,7 +65,7 @@ const Base = {
 
             Object.keys(fields).map(key => {
                 // category_id=($1)
-                const line = `${key} = '${fields[key]}`
+                const line = `${key} = '${fields[key]}'`
                 update.push(line)
             })
 
