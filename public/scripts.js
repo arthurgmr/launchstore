@@ -281,5 +281,22 @@ const Validate = {
             error,
             value
         }
+    },
+    allFields(e) {
+        const itens = document.querySelectorAll(' .item input, .item select, .item textarea')
+
+        for (item of itens) {
+            if (item.value == "") {
+                const message = document.createElement('div')
+                message.classList.add('messages')
+                message.classList.add('error')
+                message.style.position = 'fixed'
+
+                message.innerHTML = "Please, fill all fields!"
+                document.querySelector('body').append(message)
+
+                e.preventDefault()
+            }
+        }
     }
 }
