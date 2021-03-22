@@ -1,7 +1,10 @@
 {% extends "layout.njk" %}
 
+{% import "parts/card.njk" as card %}
+
 {% block content %}
-<section class="product-single container">
+
+{% call card.render('', 'product-single container') %}
 
     <div class="gallery">
         <div class="highlight">
@@ -59,19 +62,30 @@
                     <span class="old-price">{{product.formattedOldPrice}}</span>
                 {% endif %}
             </div>
-            <div class="buy">
-                {% if product.status == 0 %}
-                    <p class="unavailable">Unavailable</p>
-                {% elseif product.quantity == 0 %}
-                    <p class="unavailable">No Stock</p>
-                {% else %}
-                    <button class="button">Purchase</button>
-                {% endif %}
-            </div>
-        </div>
 
+            {% if (session.userId) and (product.user_id == session.userId) %}
+
+                <p class="unavailable">You is seller of this product!</p>
+
+            {% else %}
+
+                <div class="buy">
+                    {% if product.status == 0 %}
+                        <p class="unavailable">Unavailable</p>
+                    {% elseif product.quantity == 0 %}
+                        <p class="unavailable">No Stock</p>
+                    {% else %}
+                    <form action="/users/orders" method="post">
+                        <input type="hidden" name="id" value={{product.id}}>
+                        <button class="button">Purchase</button>
+                    </form>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
     </div>
 
-</section>
+    {% endcall %}
 
 {% endblock content %}

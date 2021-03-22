@@ -1,7 +1,10 @@
 /* user-register*/
+.user-dashboard,
 .users-register {
     max-width: 500px;
 }
+
+
 
 .users-ads {
     max-width: 700px;
